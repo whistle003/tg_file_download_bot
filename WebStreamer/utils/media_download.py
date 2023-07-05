@@ -8,6 +8,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from WebStreamer import Var
 import nest_asyncio
+from urllib.parse import quote_plus
 
 nest_asyncio.apply()
 
@@ -94,7 +95,8 @@ def download(url, file_name, file_size):
 
 
 def send_msg(user_id, text):
-    url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(Var.BOT_TOKEN, user_id, text)
+    url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(Var.BOT_TOKEN, user_id, quote_plus(text))
+
     httpx.get(url)
 
 
